@@ -1,21 +1,33 @@
 const Display = (function () {
-  const displayToday = function (temperature, timeZone) {
-    // (Fahrenheit - 32) / 1.8
-    document.querySelector("#temp").textContent = temperature;
-    document.querySelector("#location").textContent = timeZone;
+  const displayToday = function (temperature, timeZone, celsius) {
+    if (celsius) {
+      document.querySelector("#temp").textContent = `${temperature} ℃`;
+    } else {
+      document.querySelector("#temp").textContent = `${temperature} °F`;
+    }
+    document.querySelector("#locationTitle").textContent = timeZone;
   };
-  const displayTmr = function (temperature, timeZone) {
-    document.querySelector("#tmrTemp").textContent = temperature;
+  const displayTmr = function (temperature, timeZone, celsius) {
+    if (celsius) {
+      document.querySelector("#tmrTemp").textContent = `${temperature} ℃`;
+    } else {
+      document.querySelector("#tmrTemp").textContent = `${temperature} °F`;
+    }
     document.querySelector("#tmrLocation").textContent = timeZone;
   };
-  const displayWeek = function (dataArray) {
+  const displayWeek = function (dataArray, celsius) {
     for (
       let i = 0;
       i < [...document.querySelector("#week").children].length;
       i++
     ) {
       const temp = document.querySelector(`#week :nth-child(${i + 1}) h3`);
-      temp.textContent = dataArray[i].temp;
+      console.log(celsius);
+      if (celsius) {
+        temp.textContent = `${dataArray[i].temp} ℃`;
+      } else {
+        temp.textContent = `${dataArray[i].temp} °F`;
+      }
     }
   };
   return {

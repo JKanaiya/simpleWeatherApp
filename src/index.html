@@ -19,8 +19,20 @@
     </div>
     <div id="weather">
       <div id="today">
-        <h2 id="location"></h2>
-        <h2 id="temp"></h2>
+        <div id="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <h2 id="locationTitle"></h2>
+        </div>
+        <div id="summData">
+          <div id="tempDesc">
+            <h2 id="temp"></h2>
+            <h3 id="description"></h3>
+          </div>
+          <!-- <img src="" alt=""> -->
+        </div>
+        <div id="details">
+          <h2 id="feels"></h2>
+        </div>
       </div>
       <div id="tomorrow">
         <h2 id="tmrLocation"></h2>
@@ -57,5 +69,13 @@
         </div>
       </div>
     </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

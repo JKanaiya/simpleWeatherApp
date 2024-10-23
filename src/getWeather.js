@@ -28,11 +28,11 @@ const getWeather = async function (celsius) {
     }
     console.log(subData, timezone);
 
-    Display.displayToday(subData[0].temp, timezone);
+    Display.displayToday(subData[0].temp, timezone, celsius);
 
-    Display.displayTmr(subData[1].temp, timezone);
+    Display.displayTmr(subData[1].temp, timezone, celsius);
 
-    Display.displayWeek(subData);
+    Display.displayWeek(subData, celsius);
 
     console.log(subData[0].temp, timezone);
   } catch (err) {
