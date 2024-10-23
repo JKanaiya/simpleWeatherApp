@@ -21,12 +21,31 @@ const getWeather = async function (celsius) {
       });
     } else {
       days.forEach((day) => {
-        let { temp, icon } = day;
-        temp = ((temp - 32) / 1.8).toFixed(1);
+        day.temp = ((day.temp - 32) / 1.8).toFixed(1);
+        const { temp, icon } = day;
         subData.push({ temp, icon });
       });
     }
     console.log(subData, timezone);
+
+    console.log(subData[0].icon);
+
+    console.log(subData[0].icon.includes("cloudy"));
+
+    const dData = subData[0].icon;
+
+    if (dData.includes("rain")) {
+      Display.setRain();
+    }
+    if (dData.includes("cloudy")) {
+      Display.setCloudy();
+    }
+    if (dData.includes("clear")) {
+      Display.setSunny();
+    }
+    if (dData.includes("partly")) {
+      Display.setPartial();
+    }
 
     Display.displayToday(subData[0].temp, timezone, celsius);
 

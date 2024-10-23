@@ -76,6 +76,8 @@ nav {
   border-radius: 15px;
   padding: 3%;
   row-gap: 20px;
+  background-size: cover;
+  background-position: center;
   grid-row: 1/5;
   max-height: 80dvh;
   display: flex;
@@ -138,7 +140,6 @@ ion-icon {
 #tomorrow {
   grid-column: 2/2;
   border-radius: 15px;
-  background-color: purple;
   grid-row: 1/3;
 }
 #weather {
