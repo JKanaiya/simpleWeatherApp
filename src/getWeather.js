@@ -1,6 +1,6 @@
 import Display from "./Display";
 
-const getWeather = async function () {
+const getWeather = async function (celsius) {
   const w = document.querySelector("input").value;
 
   try {
@@ -13,10 +13,19 @@ const getWeather = async function () {
 
     const { days, timezone } = cData;
     const subData = [];
-    days.forEach((e) => {
-      const { temp, icon } = e;
-      subData.push({ temp, icon });
-    });
+
+    if (!celsius) {
+      days.forEach((day) => {
+        const { temp, icon } = day;
+        subData.push({ temp, icon });
+      });
+    } else {
+      days.forEach((day) => {
+        let { temp, icon } = day;
+        temp = ((temp - 32) / 1.8).toFixed(1);
+        subData.push({ temp, icon });
+      });
+    }
     console.log(subData, timezone);
 
     Display.displayToday(subData[0].temp, timezone);
@@ -26,8 +35,8 @@ const getWeather = async function () {
     Display.displayWeek(subData);
 
     console.log(subData[0].temp, timezone);
-  } catch {
-    console.log("error");
+  } catch (err) {
+    console.log(err);
   }
 };
 

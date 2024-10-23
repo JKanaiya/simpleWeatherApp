@@ -1,5 +1,6 @@
 const Display = (function () {
   const displayToday = function (temperature, timeZone) {
+    // (Fahrenheit - 32) / 1.8
     document.querySelector("#temp").textContent = temperature;
     document.querySelector("#location").textContent = timeZone;
   };
@@ -8,17 +9,14 @@ const Display = (function () {
     document.querySelector("#tmrLocation").textContent = timeZone;
   };
   const displayWeek = function (dataArray) {
-    const week = document.querySelector("#week");
-    dataArray.forEach((day) => {
-      const dayDiv = document.createElement("div");
-      const desc = document.createElement("h2");
-      desc.textContent = day.icon;
-      const temp = document.createElement("h2");
-      temp.textContent = day.temp;
-      dayDiv.appendChild(desc);
-      dayDiv.appendChild(temp);
-      week.appendChild(dayDiv);
-    });
+    for (
+      let i = 0;
+      i < [...document.querySelector("#week").children].length;
+      i++
+    ) {
+      const temp = document.querySelector(`#week :nth-child(${i + 1}) h3`);
+      temp.textContent = dataArray[i].temp;
+    }
   };
   return {
     displayToday,
