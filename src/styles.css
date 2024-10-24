@@ -54,7 +54,37 @@ h6 {
   isolation: isolate;
 }
 
-#search {
+.button-28 {
+  appearance: none;
+  background-color: transparent;
+  /* add alpha here */
+  border: 2px solid #1a1a1a;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+#sArea {
   display: flex;
 }
 body {
@@ -65,14 +95,53 @@ body {
 }
 nav {
   column-gap: 30px;
+  width: 80%;
+  margin-top: 20px;
+  justify-content: space-between;
   display: flex;
+}
+nav h2 {
+  margin-top: 15px;
+}
+nav input {
+  border-radius: 10px 0px 0px 10px;
+  padding-left: 5%;
+}
+#sArea button {
+  border-radius: 0px 10px 10px 0px;
+}
+#bgImg {
+  height: 100dvh;
+  width: 100%;
+  filter: blur(15px);
+  z-index: -1;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+#changeFormat div {
+  width: 50px;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+#celsius {
+  border-radius: 10px 0px 0px 10px;
+}
+#faren {
+  border-radius: 0px 10px 10px 0px;
 }
 #changeFormat {
   display: flex;
 }
 #today {
   grid-column: 1/2;
-  background-color: grey;
+  background-color: white;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+  mix-blend-mode: overlay;
   border-radius: 15px;
   padding: 3%;
   row-gap: 20px;
@@ -83,6 +152,10 @@ nav {
   display: flex;
   flex-direction: column;
 }
+#icons {
+  display: flex;
+  padding: 4%;
+}
 ion-icon {
   margin-top: 3px;
   font-size: 1.5rem;
@@ -92,24 +165,30 @@ ion-icon {
   display: flex;
   column-gap: 15px;
   border-radius: 10px;
-  border: 2px solid red;
 }
 #summData {
-  height: 70%;
+  height: 67%;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  border: 2px solid red;
+}
+#summData ion-icon {
+  font-size: 13rem;
+  margin-top: 40px;
+}
+.active {
+  display: flex;
+}
+.inactive {
+  display: none;
 }
 #tempDesc {
   height: 100%;
   padding: 3%;
   width: 50%;
   padding-top: 15%;
-  border: 2px solid blue;
 }
 #tempDesc h2 {
-  font-size: 2.7rem;
+  font-size: 4rem;
 }
 #week {
   grid-column: 2/2;
@@ -131,7 +210,7 @@ ion-icon {
   padding: 2%;
   column-gap: 20px;
   border-radius: 10px;
-  border: 2px solid red;
+  border: 2px solid black;
 }
 
 #week div h2 {
@@ -139,9 +218,26 @@ ion-icon {
 }
 #tomorrow {
   grid-column: 2/2;
+  padding: 4%;
+  background-color: white;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+  mix-blend-mode: overlay;
   border-radius: 15px;
   grid-row: 1/3;
 }
+#tmrTemp {
+  font-size: 3.5rem;
+}
+#error {
+  background-color: #3b3b3b;
+  height: 100dvh;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #weather {
   min-height: 80dvh;
   width: 80%;
@@ -151,5 +247,5 @@ ion-icon {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  background-color: aquamarine;
+  mix-blend-mode: overlay;
 }

@@ -1,14 +1,25 @@
 import sunny from "./images/pexels-jimbear-1117403.jpg";
-import cloudy from "./images/pexels-pixabay-414659.jpg";
+import cloudy from "./images/pexels-joshsorenson-1154510.jpg";
 import rain from "./images/pexels-hikaique-125510.jpg";
-import partlyCloudy from "./images/pexels-tugba-19754770.jpg";
+import partlyCloudy from "./images/pexels-pixabay-158827.jpg";
 
 const Display = (function () {
-  const displayToday = function (temperature, timeZone, celsius) {
+  const clearIcons = function () {
+    [...document.querySelector("#icons").children].forEach((child) => {
+      child.classList.add("inactive");
+    });
+  };
+  const displayToday = function (temperature, timeZone, celsius, feelsLike) {
     if (celsius) {
       document.querySelector("#temp").textContent = `${temperature} ℃`;
+      document.querySelector(
+        "#feels"
+      ).textContent = `Feels like: ${feelsLike} ℃`;
     } else {
       document.querySelector("#temp").textContent = `${temperature} °F`;
+      document.querySelector(
+        "#feels"
+      ).textContent = `Feels like: ${feelsLike} °F`;
     }
     document.querySelector("#locationTitle").textContent = timeZone;
   };
@@ -19,17 +30,16 @@ const Display = (function () {
     } else {
       document.querySelector("#tmrTemp").textContent = `${temperature} °F`;
     }
-    document.querySelector("#tmrLocation").textContent = timeZone;
   };
 
   const displayWeek = function (dataArray, celsius) {
+    console.log(dataArray);
     for (
       let i = 0;
       i < [...document.querySelector("#week").children].length;
       i++
     ) {
       const temp = document.querySelector(`#week :nth-child(${i + 1}) h3`);
-      console.log(celsius);
       if (celsius) {
         temp.textContent = `${dataArray[i].temp} ℃`;
       } else {
@@ -38,18 +48,37 @@ const Display = (function () {
     }
   };
   const setRain = function () {
-    document.querySelector("#today").style.backgroundImage = `url(${rain})`;
+    clearIcons();
+    document.querySelector("#bgImg").style.backgroundImage = `url(${rain})`;
+    document.querySelector("#rain").classList.toggle("inactive");
   };
   const setSunny = function () {
-    document.querySelector("#today").style.backgroundImage = `url(${sunny})`;
+    clearIcons();
+    document.querySelector("#bgImg").style.backgroundImage = `url(${sunny})`;
+    document.querySelector("#sunny").classList.toggle("inactive");
   };
   const setCloudy = function () {
-    document.querySelector("#today").style.backgroundImage = `url(${cloudy})`;
+    clearIcons();
+    document.querySelector("#bgImg").style.backgroundImage = `url(${cloudy})`;
+    document.querySelector("#cloudy").classList.toggle("inactive");
   };
   const setPartial = function () {
+    clearIcons();
     document.querySelector(
-      "#today"
+      "#bgImg"
     ).style.backgroundImage = `url(${partlyCloudy})`;
+    document.querySelector("#partly").classList.toggle("inactive");
+  };
+  const toggleActive = function (celsius) {
+    const cel = document.querySelector("#celsius");
+    const far = document.querySelector("#faren");
+    if (celsius) {
+      far.style.backgroundColor = "gray";
+      cel.style.backgroundColor = "white";
+    } else {
+      far.style.backgroundColor = "white";
+      cel.style.backgroundColor = "gray";
+    }
   };
   return {
     setRain,
@@ -59,6 +88,7 @@ const Display = (function () {
     setSunny,
     displayWeek,
     setCloudy,
+    toggleActive,
   };
 })();
 export default Display;

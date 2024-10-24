@@ -14,40 +14,40 @@ const getWeather = async function (celsius) {
     const { days, timezone } = cData;
     const subData = [];
 
-    if (!celsius) {
-      days.forEach((day) => {
-        const { temp, icon } = day;
-        subData.push({ temp, icon });
-      });
-    } else {
-      days.forEach((day) => {
-        day.temp = ((day.temp - 32) / 1.8).toFixed(1);
-        const { temp, icon } = day;
-        subData.push({ temp, icon });
-      });
-    }
-    console.log(subData, timezone);
+    const toCelsius = function (target) {
+      return ((target - 32) / 1.8).toFixed(1);
+    };
 
-    console.log(subData[0].icon);
-
-    console.log(subData[0].icon.includes("cloudy"));
-
+    days.forEach((day) => {
+      if (celsius) {
+        day.temp = toCelsius(day.temp);
+        day.feelslike = toCelsius(day.feelslike);
+      }
+      const { temp, icon, feelslike } = day;
+      subData.push({ temp, icon, feelslike });
+    });
     const dData = subData[0].icon;
 
-    if (dData.includes("rain")) {
-      Display.setRain();
-    }
-    if (dData.includes("cloudy")) {
-      Display.setCloudy();
-    }
-    if (dData.includes("clear")) {
-      Display.setSunny();
-    }
-    if (dData.includes("partly")) {
-      Display.setPartial();
-    }
+    const setWFormat = function (dData) {
+      if (dData.includes("rain")) {
+        Display.setRain();
+      } else if (dData.includes("partly")) {
+        Display.setPartial();
+      } else if (dData.includes("clear")) {
+        Display.setSunny();
+      } else {
+        Display.setCloudy();
+      }
+    };
 
-    Display.displayToday(subData[0].temp, timezone, celsius);
+    setWFormat(dData);
+
+    Display.displayToday(
+      subData[0].temp,
+      timezone,
+      celsius,
+      subData[0].feelslike
+    );
 
     Display.displayTmr(subData[1].temp, timezone, celsius);
 
@@ -56,6 +56,12 @@ const getWeather = async function (celsius) {
     console.log(subData[0].temp, timezone);
   } catch (err) {
     console.log(err);
+    const dError = document.querySelector("#error");
+    dError.style.display = "flex";
+    document.querySelector("#eButton").addEventListener("click", () => {
+      console.log("a");
+      dError.style.display = "none";
+    });
   }
 };
 

@@ -7,18 +7,27 @@
   </head>
   <body>
     <nav>
-      <h2>Search for your Country's Weather for today</h2>
+      <h2>Weather Project</h2>
+      <div id="sArea">
+        <input type="text" placeholder="Search here" id="searchCountry" />
+        <button id="search" class="button-28">Search</button>
+      </div>
       <div id="changeFormat">
-        <button id="celsius">C</button>
-        <button id="faren">F</button>
+        <div id="celsius">C</div>
+        <div id="faren">F</div>
       </div>
     </nav>
-    <div id="search">
-      <input type="text" placeholder="Search here" />
-      <button id="search">Search</button>
+    <div id="bgImg"></div>
+    <div id="error">
+      <h2>
+        There was an error fetching the data, please check your query and search
+        again
+      </h2>
+      <button id="eButton">OK</button>
     </div>
     <div id="weather">
       <div id="today">
+        <h2>Today</h2>
         <div id="location">
           <ion-icon name="location-outline"></ion-icon>
           <h2 id="locationTitle"></h2>
@@ -28,13 +37,19 @@
             <h2 id="temp"></h2>
             <h3 id="description"></h3>
           </div>
-          <!-- <img src="" alt=""> -->
+          <div id="icons">
+            <ion-icon name="sunny-outline" id="sunny"></ion-icon>
+            <ion-icon name="partly-sunny-outline" id="partly"></ion-icon>
+            <ion-icon name="rainy-outline" id="rain"></ion-icon>
+            <ion-icon name="cloud-outline" id="cloudy"></ion-icon>
+          </div>
         </div>
         <div id="details">
           <h2 id="feels"></h2>
         </div>
       </div>
       <div id="tomorrow">
+        <h2>Tomorrow</h2>
         <h2 id="tmrLocation"></h2>
         <h2 id="tmrTemp"></h2>
       </div>
